@@ -22,43 +22,72 @@
 		function playRound(playerSelection, computerSelection) {
 			if (playerSelection == 'rock') {
 				if (computerSelection == 'rock') {
-					return 'Draw!';
+					console.log('Draw!');
+					return 0;
 				}
 				if (computerSelection == 'paper') {
-					return 'You lose! Paper beats rock.';
+					console.log('Paper beats rock. Computer\'s point.');
+					return -1;
 				}
 				if (computerSelection == 'scissors') {
-					return 'You win! Rock beats scissors.';
+					console.log('Rock beats scissors. Your point.');
+					return 1;
 				}
 			}
 			if (playerSelection == 'paper') {
 				if (computerSelection == 'rock') {
-					return 'You win! Paper beats rock.';
+					console.log('Paper beats rock. Your point.');
+					return 1;
 				}
 				if (computerSelection == 'paper') {
-					return 'Draw!';
+					console.log('Draw!');
+					return 0;
 				}
 				if (computerSelection == 'scissors') {
-					return 'You lose! Scissors beats paper.';
+					console.log('Scissors beats paper. Computer\'s point.');
+					return -1;
 				}
 			}
 			if (playerSelection == 'scissors') {
 				if (computerSelection == 'rock') {
-					return 'You lose! Rock beats scissors.';
+					console.log('Rock beats scissors. Computer\'s point.');
+					return -1;
 				}
 				if (computerSelection == 'paper') {
-					return 'You win! Scissors beats paper.';
+					console.log('Scissors beats paper. Your point');
+					return 1;
 				}
 				if (computerSelection == 'scissors') {
-					return 'Draw!';
+					console.log('Draw!');
+					return 0;
 				}
 			}
 			return 'error';
 		}
-
-		const playerSelection = prompt('Rock, paper, or scissors?').toLowerCase();
-		let computerSelection = computerPlay();
-		console.log(playRound(playerSelection, computerSelection));
+		function game() {
+			console.log('Best of 5.');
+			let computerScore = 0;
+			let playerScore = 0;
+			while (computerScore < 3 && playerScore < 3) {
+				let playerSelection = prompt('Rock, paper, or scissors?').toLowerCase();
+				let computerSelection = computerPlay();
+				let outcome = playRound(playerSelection, computerSelection);
+				if (outcome > 0) {
+					++playerScore;
+				} else if (outcome < 0) {
+					++computerScore;
+				}
+				console.log('Computer: ' + computerScore + ' -- Player: ' + playerScore);
+			}
+			if (computerScore > playerScore) {
+				console.log('Computer wins, ' + computerScore + ' to ' + playerScore + '.');
+				return 0;
+			} else if (playerScore > computerScore) {
+				console.log('Player wins, ' + playerScore + ' to ' + computerScore + '.');
+				return 0;
+			}
+		}
+		alert('Enter "game()" in console to begin.');
 	</script>
 </body>
 </html>
